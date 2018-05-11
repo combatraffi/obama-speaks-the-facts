@@ -16,14 +16,24 @@ def get_fact():
 
     return facts[0].getText()
 
+def damnitobaaama(ourfact):
+    obamaurl = "http://talkobamato.me/synthesize.py"
+    sendpost = requests.post(obamaurl, {input_text: ourfact})
+    vidurl = sendpost.headers.get('Location')
+
+
 
 @app.route('/')
 def home():
-    return "FILL ME!"
+    fact = get_fact()
+    body = damnitobama(fact)
+
+
+    return Response(response = body, mimetype=SOMETHIGN)
 
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 6787))
     app.run(host='0.0.0.0', port=port)
 
-I DID SOMEHTING BEFORE CLASS!
+#I DID SOMEHTING BEFORE CLASS!
