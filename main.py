@@ -16,20 +16,19 @@ def get_fact():
 
     return facts[0].getText()
 
-def damnitobaaama(ourfact):
-    obamaurl = "http://talkobamato.me/synthesize.py"
-    sendpost = requests.post(obamaurl, {input_text: ourfact})
-    vidurl = sendpost.headers.get('Location')
 
+def damnitobaaama(ourfact):
+    URL2 = "http://talkobamato.me/synthesize.py?"
+    r = requests.post(URL2, {'input_text': ourfact}, allow_redirects=False)
+    return r.headers['Location']
 
 
 @app.route('/')
 def home():
     fact = get_fact()
-    body = damnitobama(fact)
+    body = damnitobaaama(fact)
 
-
-    return Response(response = body, mimetype=SOMETHIGN)
+    return Response(response=body, mimetype='text/plain')
 
 
 if __name__ == "__main__":
